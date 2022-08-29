@@ -1,0 +1,30 @@
+version: 2.1
+
+jobs:
+  building_docker: # this can be any name you choose 
+    docker:
+      - image: circleci/python:3.6.1
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      
+      - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "requirements.txt" }}
+          - v1-dependencies-
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ cehcksum "requirements.txt"}}
+
+      - run:
+          name: run lint
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            make lint
+            
+            
