@@ -13,6 +13,13 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
             - v1-dependencies-
+            
+      - run:
+          name: run lint
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            make lnstall
 
       - save_cache:
           paths:
@@ -22,7 +29,6 @@ jobs:
       - run:
           name: run lint
           command: |
-            python3 -m venv venv
             . venv/bin/activate
             make lint
             
