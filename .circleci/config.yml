@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 
 jobs:
   building_docker: # this can be any name you choose 
@@ -9,16 +9,15 @@ jobs:
 
     steps:
       - checkout
-      
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
-          - v1-dependencies-
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            - v1-dependencies-
 
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ cehcksum "requirements.txt"}}
+          key: v1-dependencies-{{ checksum "requirements.txt"}}
 
       - run:
           name: run lint
@@ -26,5 +25,4 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             make lint
-            
             
