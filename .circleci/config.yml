@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  building_docker: # this can be any name you choose 
+  build: # this can be any name you choose 
     docker:
       - image: circleci/python:3.6.1
 
